@@ -92,27 +92,29 @@
     <td bgcolor="#CCCCCC"><strong>Comandos:</strong></td>
   </tr>
   <tr>
-    <td>xmake -v<br />
-      xmake run</td>
+    <td>mkdir meu-projeto<br />
+cd meu-projeto <br />
+xmake -v <br />
+xmake run meu-projeto</td>
   </tr>
   <tr>
     <td bgcolor="#CCCCCC">Ou:</td>
   </tr>
   <tr>
-    <td>xmake run meu-projeto</td>
+    <td>xmake run</td>
   </tr>
 </table>
-<p data-selectable-paragraph="">&nbsp;</p>
+<h1 align="center" data-selectable-paragraph="">Compilando v&aacute;rios arquivos </h1>
 <table width="100%" border="1">
   <tbody>
     <tr>
       <td bgcolor="#CCCCCC"><strong>Arquivo: xmake.lua </strong></td>
     </tr>
     <tr>
-      <td>target(&quot;meu-projeto&quot;)<br />
+      <td>target(&quot;meu-programa&quot;)<br />
         &nbsp;&nbsp;&nbsp; set_kind(&quot;binary&quot;)<br />
         &nbsp;&nbsp;&nbsp; add_files(&quot;main.cpp&quot;)<br />
-        &nbsp;&nbsp;&nbsp; add_files(&quot;projeto.cpp&quot;)</td>
+        &nbsp;&nbsp;&nbsp; add_files(&quot;programa.cpp&quot;)</td>
     </tr>
   </tbody>
 </table>
@@ -122,12 +124,21 @@
     <td bgcolor="#CCCCCC"><strong>Comandos:</strong></td>
   </tr>
   <tr>
-    <td>xmake -v
+    <td>mkdir meu-programa<br />
+      cd meu-programa
       <br />
-      xmake run meu-projeto</td>
+      xmake -v
+      <br />
+      xmake run meu-programa</td>
+  </tr>
+  <tr>
+    <td bgcolor="#CCCCCC">Ou:</td>
+  </tr>
+  <tr>
+    <td>xmake run</td>
   </tr>
 </table>
-<p data-selectable-paragraph="">&nbsp;</p>
+<h1 align="center" data-selectable-paragraph="">Usando uma Biblioteca Compartilhada Ncurses </h1>
 <table border="1" width="100%" cellpadding="2" cellspacing="2">
   <tbody>
     <tr>
@@ -193,9 +204,14 @@
       <td bgcolor="#CCCCCC"><strong>Arquivo: xmake.lua </strong></td>
     </tr>
     <tr>
-      <td>target(&quot;janela&quot;)<br />
+      <td>add_rules(&quot;mode.debug&quot;, &quot;mode.release&quot;)<br />
+        add_requires(&quot;ncurses&quot;)<br />
+        <br />
+        target(&quot;janela&quot;)<br />
         &nbsp;&nbsp;&nbsp; set_kind(&quot;binary&quot;)<br />
-        &nbsp;&nbsp;&nbsp; add_files(&quot;janelas.cpp&quot;) </td>
+        &nbsp;&nbsp;&nbsp; add_packages(&quot;ncurses&quot;, {links = &quot;ncurses&quot;}) <br />
+        &nbsp;&nbsp;&nbsp; add_ldflags(&quot;-ltinfo&quot;, {force = true})<br />
+      &nbsp;&nbsp;&nbsp; add_files(&quot;janelas.c&quot;) </td>
     </tr>
   </tbody>
 </table>
@@ -210,6 +226,12 @@ cd janelas<br />
 xmake -v<br />
 xmake run janelas </td>
   </tr>
+  <tr>
+    <td bgcolor="#CCCCCC">Ou:</td>
+  </tr>
+  <tr>
+    <td>xmake run</td>
+  </tr>
 </table>
 <p data-selectable-paragraph="">Uma vez criado os arquivos do nosso projeto vamos testar para saber se est&aacute; tudo funcionando como planejado para isso siga as instru&ccedil;&otilde;es abaixo.</p>
 <table width="100%" border="1">
@@ -217,8 +239,9 @@ xmake run janelas </td>
     <tr>
       <td width="50%"><p align="right">xmake -v<br />
         xmake run<br />
-        xmake run meu-projeto <br />
+        xmake run meu-projeto<br />
         xmake clean<br />
+        rm -rf build/ ,xmake/ <br />
         xmake project<br />
         xmake project -k cmake</p>
         <p align="right">xmake create janelas<br />
@@ -231,6 +254,7 @@ xmake run janelas </td>
         Executa o programa<br />
         Executa o programa com o atributo meu-projeto<br />
         limpa o projeto<br />
+        Exclui a pasta build e a pasta .make <br />
         produz o makefile<br />
       produz o CMakeLists.txt para buildar no Cmake </p>
       <p>Cria o projeto Janelas<br />
@@ -241,6 +265,14 @@ xmake run janelas </td>
     </tr>
   </tbody>
 </table>
-<p align="center">&nbsp;</p>
+<h1 align="center">Compilando Arquivos em Rust</h1>
+<p align="left">Compila da mesma forma! Em vez da extens&atilde;o *.c, *.cpp usa-se a extens&atilde;o *.rs</p>
+<p align="left">Funciona em todas as linguagens </p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp;  </p>
 </body>
 </html>
