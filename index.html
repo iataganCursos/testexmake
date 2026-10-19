@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Xmake</title>
+<style type="text/css">
+<!--
+.style2 {color: #FFFFFF}
+-->
+</style>
+</head>
+
+<body>
+<h1 align="center">Xmake</h1>
+<h1 align="center">COMPILE para C/C++ com XMAKE baseado em LUA</h1>
+<p align="center"><iframe width="859" height="483" src="https://www.youtube.com/embed/ydgcsv-hssY" title="COMPILE para C/C++ com XMAKE baseado em LUA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>
+<p align="center">&nbsp;</p>
+<h1 align="center"><a href="https://xmake.io/" target="_blank">https://xmake.io/</a></h1>
+<div dir="auto">
+  <h1 align="center" dir="auto" tabindex="-1">Installation</h1>
+</div>
+<div dir="auto">
+  <h3 tabindex="-1" dir="auto">With cURL</h3>
+  </div>
+<div dir="auto">
+  <pre>curl -fsSL https://xmake.io/shget.text | bash</pre>
+  <div></div>
+</div>
+<div dir="auto">
+  <h3 tabindex="-1" dir="auto">With Wget</h3>
+  </div>
+<div dir="auto">
+  <pre>wget https://xmake.io/shget.text -O - | bash</pre>
+  <div></div>
+</div>
+<div dir="auto">
+  <h3 tabindex="-1" dir="auto">With PowerShell</h3>
+  </div>
+<div dir="auto">
+  <pre>irm https://xmake.io/psget.text | iex</pre>
+  <div></div>
+</div>
+<div dir="auto"></div>
+<br />
+<p align="center">&nbsp;</p>
+<h2 align="center" id="3e1a" data-selectable-paragraph="">Criando um hello world em cpp</h2>
+<p id="aab3" data-selectable-paragraph="">Para facilitar nosso exemplo vamos criar um pequeno hello world em cpp e gerar o build com o cmake.</p>
+<p id="e66c" data-selectable-paragraph="">Criando um diret&oacute;rio para o projeto.</p>
+<ul>
+  <li id="4d28" data-selectable-paragraph="">$ mkdir sampleCmake</li>
+  <li id="b739" data-selectable-paragraph="">$ cd sampleCmake</li>
+  <li id="cb0b" data-selectable-paragraph="">$ vi main.cpp</li>
+</ul>
+<p id="8cbf" data-selectable-paragraph="">Dentro do arquivo&nbsp;main.cpp&nbsp;coloque o conte&uacute;do abaixo.</p>
+<table width="100%" border="1">
+  <tbody>
+    <tr>
+      <td bgcolor="#CCCCCC"><strong>Arquivo: main.cpp</strong></td>
+    </tr>
+    <tr>
+      <td>#include &lt;iostream&gt;<br />
+          <br />
+        using namespace std;<br />
+        <br />
+        int main(void) {<br />
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp; cout &lt;&lt; &quot;Hello World&quot; &lt;&lt; endl;<br />
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp; return(0);<br />
+        <br />
+        }</td>
+    </tr>
+  </tbody>
+</table>
+<p data-selectable-paragraph="">Agora temos que criar o nosso CMakeLists.txt que ser&aacute; o roteiro usado pelo cmake para criar os scripts de compila&ccedil;&atilde;o da aplica&ccedil;&atilde;o. dentro do CMakeLists.txt coloque o conte&uacute;do listado abaixo.</p>
+<table width="100%" border="1">
+  <tbody>
+    <tr>
+      <td bgcolor="#CCCCCC"><strong>Arquivo: xmake.lua </strong></td>
+    </tr>
+    <tr>
+      <td>target("meu-projeto")<br>
+&nbsp;&nbsp;&nbsp; set_kind("binary")<br>
+&nbsp;&nbsp;&nbsp; add_files("main.cpp")
+</td>
+    </tr>
+  </tbody>
+</table>
+<p data-selectable-paragraph="">&nbsp;</p>
+<table width="100%" border="1">
+  <tbody>
+    <tr>
+      <td bgcolor="#CCCCCC"><strong>Arquivo: xmake.lua </strong></td>
+    </tr>
+    <tr>
+      <td>target(&quot;meu-projeto&quot;)<br />
+        &nbsp;&nbsp;&nbsp; set_kind(&quot;binary&quot;)<br />
+        &nbsp;&nbsp;&nbsp; add_files(&quot;main.cpp&quot;)<br />
+        &nbsp;&nbsp;&nbsp; add_files(&quot;projeto.cpp&quot;)</td>
+    </tr>
+  </tbody>
+</table>
+<p data-selectable-paragraph="">Uma vez criado os arquivos do nosso projeto vamos testar para saber se est&aacute; tudo funcionando como planejado para isso siga as instru&ccedil;&otilde;es abaixo.</p>
+<table width="100%" border="1">
+  <tbody>
+    <tr>
+      <td bgcolor="#000000"><p class="style2">xmake -v<br />
+        xmake run<br />
+        xmake run meu-projeto
+        <br />
+        xmake clean (limpa)<br />
+        xmake project (produz o makefile)<br />
+        xmake project -k cmake (produz o CMakeLists.txt)</p>
+        <p class="style2">xmake create janelas<br />
+          cd janelas</p>
+        <p class="style2">          sudo xmake install (instala o aplicativo)<br />
+      meu-projeto</p>
+      <p class="style2">sudo xmake uninstall (desinstala o aplicativo) </p></td>
+    </tr>
+  </tbody>
+</table>
+<p>Nos criamos um diret&oacute;rio aparte para compilar o projeto convencionalmente chamado de build e depois executamos o cmake ../ mas informa&ccedil;&otilde;es para que ele procure o CMakeLists.txt no diret&oacute;rio anterior. Uma vez que encontre o CMakeLists.txt o cmake come&ccedil;a a constru&ccedil;&atilde;o dos scripts de compila&ccedil;&atilde;o necess&aacute;rios no caso do exemplo acima um Makefile. Terminado a constru&ccedil;&atilde;o sem erros temos um arquivo Makefile pronto para compila&ccedil;&atilde;o nesse caso &eacute; s&oacute; executar um &quot;make&quot; para compilar e depois executar o bin&aacute;rio &quot;./hello&quot;.</p>
+<p align="center">&nbsp;</p>
+</body>
+</html>
