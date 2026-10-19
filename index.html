@@ -21,21 +21,21 @@
 </div>
 <div dir="auto">
   <h3 tabindex="-1" dir="auto">With cURL</h3>
-  </div>
+</div>
 <div dir="auto">
   <pre>curl -fsSL https://xmake.io/shget.text | bash</pre>
   <div></div>
 </div>
 <div dir="auto">
   <h3 tabindex="-1" dir="auto">With Wget</h3>
-  </div>
+</div>
 <div dir="auto">
   <pre>wget https://xmake.io/shget.text -O - | bash</pre>
   <div></div>
 </div>
 <div dir="auto">
   <h3 tabindex="-1" dir="auto">With PowerShell</h3>
-  </div>
+</div>
 <div dir="auto">
   <pre>irm https://xmake.io/psget.text | iex</pre>
   <div></div>
@@ -72,7 +72,7 @@
     </tr>
   </tbody>
 </table>
-<p data-selectable-paragraph="">Agora temos que criar o nosso CMakeLists.txt que ser&aacute; o roteiro usado pelo cmake para criar os scripts de compila&ccedil;&atilde;o da aplica&ccedil;&atilde;o. dentro do CMakeLists.txt coloque o conte&uacute;do listado abaixo.</p>
+<p data-selectable-paragraph="">Agora temos que criar o nosso xmake.lua que ser&aacute; o roteiro usado pelo cmake para criar os scripts de compila&ccedil;&atilde;o da aplica&ccedil;&atilde;o. dentro do xmake.lua coloque o conte&uacute;do listado abaixo.</p>
 <table width="100%" border="1">
   <tbody>
     <tr>
@@ -88,6 +88,22 @@
 </table>
 <p data-selectable-paragraph="">&nbsp;</p>
 <table width="100%" border="1">
+  <tr>
+    <td bgcolor="#CCCCCC"><strong>Comandos:</strong></td>
+  </tr>
+  <tr>
+    <td>xmake -v<br />
+      xmake run</td>
+  </tr>
+  <tr>
+    <td bgcolor="#CCCCCC">Ou:</td>
+  </tr>
+  <tr>
+    <td>xmake run meu-projeto</td>
+  </tr>
+</table>
+<p data-selectable-paragraph="">&nbsp;</p>
+<table width="100%" border="1">
   <tbody>
     <tr>
       <td bgcolor="#CCCCCC"><strong>Arquivo: xmake.lua </strong></td>
@@ -100,26 +116,131 @@
     </tr>
   </tbody>
 </table>
+<p data-selectable-paragraph="">&nbsp;</p>
+<table width="100%" border="1">
+  <tr>
+    <td bgcolor="#CCCCCC"><strong>Comandos:</strong></td>
+  </tr>
+  <tr>
+    <td>xmake -v
+      <br />
+      xmake run meu-projeto</td>
+  </tr>
+</table>
+<p data-selectable-paragraph="">&nbsp;</p>
+<table border="1" width="100%" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td bgcolor="#CCCCCC"><strong>Arquivo: janelas.c</strong></td>
+    </tr>
+    <tr>
+      <td>// gcc janelas.c -o janelas -l ncurses<br />
+        #include &lt;curses.h&gt; //&lt;-- Inclua esta biblioteca em nosso projeto.<br />
+        #include &lt;stdio.h&gt;<br />
+        <br />
+        int main(int argc, char **argv){<br />
+        <br />
+        &nbsp;&nbsp; initscr();<br />
+        &nbsp;&nbsp; keypad(stdscr, true);<br />
+        <br />
+        &nbsp;&nbsp; start_color(); // Esta fun&ccedil;&atilde;o torna poss&iacute;vel o uso das cores<br />
+        &nbsp;&nbsp; // Fundo da Tela<br />
+        &nbsp;&nbsp; init_pair(1,COLOR_WHITE,COLOR_YELLOW); // Texto(Branco) | Fundo(Amarelo)<br />
+        &nbsp;&nbsp; bkgd(COLOR_PAIR(1));&nbsp; // Aqui n&oacute;s definiremos que a cor de fundo da tela.<br />
+        <br />
+        &nbsp;&nbsp; init_pair(2,COLOR_RED,COLOR_WHITE);&nbsp;&nbsp;&nbsp; //Texto(Vermelho) | Fundo(Branco)<br />
+        &nbsp;&nbsp; attron(COLOR_PAIR(2)); // Estamos alterando a cor da letra<br />
+        &nbsp;&nbsp; printw(&quot;Texto Vermelho Fundo Branco\n&quot;);<br />
+        <br />
+        &nbsp;&nbsp; init_pair(3,COLOR_WHITE,COLOR_BLUE);&nbsp;&nbsp; //Texto(branco) | Fundo(Azul)<br />
+        &nbsp;&nbsp; attron(COLOR_PAIR(3)); // Estamos alterando a cor da letra<br />
+        &nbsp;&nbsp; printw(&quot;Texto Branco&nbsp;&nbsp; Fundo Azul&nbsp; \n&quot;);<br />
+        <br />
+        &nbsp;&nbsp; init_pair(4,COLOR_WHITE,COLOR_GREEN);&nbsp;&nbsp; //Texto(branco) | Fundo(Verde)<br />
+        &nbsp;&nbsp; attron(COLOR_PAIR(4)); // Estamos alterando a cor da letra<br />
+        &nbsp;&nbsp; printw(&quot;Texto Branco&nbsp;&nbsp; Fundo Verde \n&quot;);<br />
+        <br />
+        &nbsp;&nbsp; init_pair(5,COLOR_BLACK,COLOR_WHITE);&nbsp;&nbsp; //Texto(preto) | Fundo(branco)<br />
+        &nbsp;&nbsp; attron(COLOR_PAIR(5)); // Estamos alterando a cor da letra<br />
+        &nbsp;&nbsp; printw(&quot;Precione qualquer tecla para sair.&quot;);<br />
+        &nbsp;&nbsp; getch();<br />
+        &nbsp;&nbsp; endwin();<br />
+        <br />
+        &nbsp;&nbsp; return 0;<br />
+        <br />
+      }<br /></td>
+    </tr>
+    <tr>
+      <td bgcolor="#CCCCCC"><strong>Comandos:</strong></td>
+    </tr>
+    <tr>
+      <td>~$ gcc janelas.c -o janelas -l ncurses<br />
+      ~$ ./janelas</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(255, 255, 0);">
+<span style="color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);">Texto Vermelho Fundo Branco</span><br>
+<span style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 255);">Texto Branco Fundo Azul</span><br>
+<span style="color: rgb(255, 255, 255); background-color: rgb(0, 255, 0);">Texto Branco Fundo Verde </span><br>
+<span style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">Precione qualquer tecla para sair.</span></td>
+    </tr>
+  </tbody>
+</table>
+<p data-selectable-paragraph="">&nbsp;</p>
+<table width="100%" border="1">
+  <tbody>
+    <tr>
+      <td bgcolor="#CCCCCC"><strong>Arquivo: xmake.lua </strong></td>
+    </tr>
+    <tr>
+      <td>target(&quot;janela&quot;)<br />
+        &nbsp;&nbsp;&nbsp; set_kind(&quot;binary&quot;)<br />
+        &nbsp;&nbsp;&nbsp; add_files(&quot;janelas.cpp&quot;) </td>
+    </tr>
+  </tbody>
+</table>
+<p data-selectable-paragraph="">&nbsp;</p>
+<table width="100%" border="1">
+  <tr>
+    <td bgcolor="#CCCCCC"><strong>Comandos:</strong></td>
+  </tr>
+  <tr>
+    <td>xmake create janelas<br />
+cd janelas<br />
+xmake -v<br />
+xmake run janelas </td>
+  </tr>
+</table>
 <p data-selectable-paragraph="">Uma vez criado os arquivos do nosso projeto vamos testar para saber se est&aacute; tudo funcionando como planejado para isso siga as instru&ccedil;&otilde;es abaixo.</p>
 <table width="100%" border="1">
   <tbody>
     <tr>
-      <td bgcolor="#000000"><p class="style2">xmake -v<br />
+      <td width="50%"><p align="right">xmake -v<br />
         xmake run<br />
-        xmake run meu-projeto
-        <br />
-        xmake clean (limpa)<br />
-        xmake project (produz o makefile)<br />
-        xmake project -k cmake (produz o CMakeLists.txt)</p>
-        <p class="style2">xmake create janelas<br />
+        xmake run meu-projeto <br />
+        xmake clean<br />
+        xmake project<br />
+        xmake project -k cmake</p>
+        <p align="right">xmake create janelas<br />
           cd janelas</p>
-        <p class="style2">          sudo xmake install (instala o aplicativo)<br />
-      meu-projeto</p>
-      <p class="style2">sudo xmake uninstall (desinstala o aplicativo) </p></td>
+        <p align="right"> sudo xmake install<br />
+          meu-projeto</p>
+      <p align="right">sudo xmake uninstall</p></td>
+      <td width="3%">&nbsp;</td>
+      <td width="50%"><p>Compila o projeto<br />
+        Executa o programa<br />
+        Executa o programa com o atributo meu-projeto<br />
+        limpa o projeto<br />
+        produz o makefile<br />
+      produz o CMakeLists.txt para buildar no Cmake </p>
+      <p>Cria o projeto Janelas<br />
+      </p>
+      <p>instala o aplicativo executando o atributo meu-projeto<br />
+      </p>
+      <p>desinstala o aplicativo </p></td>
     </tr>
   </tbody>
 </table>
-<p>Nos criamos um diret&oacute;rio aparte para compilar o projeto convencionalmente chamado de build e depois executamos o cmake ../ mas informa&ccedil;&otilde;es para que ele procure o CMakeLists.txt no diret&oacute;rio anterior. Uma vez que encontre o CMakeLists.txt o cmake come&ccedil;a a constru&ccedil;&atilde;o dos scripts de compila&ccedil;&atilde;o necess&aacute;rios no caso do exemplo acima um Makefile. Terminado a constru&ccedil;&atilde;o sem erros temos um arquivo Makefile pronto para compila&ccedil;&atilde;o nesse caso &eacute; s&oacute; executar um &quot;make&quot; para compilar e depois executar o bin&aacute;rio &quot;./hello&quot;.</p>
 <p align="center">&nbsp;</p>
 </body>
 </html>
